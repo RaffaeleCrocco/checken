@@ -18,13 +18,6 @@ app.use(cors());
     allowedHeaders: ["Content-Type"],
   })
 ); */
-// Serve static files from the frontend build directory
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
-
-// Handle all other routes by serving the index.html file
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../frontend/dist", "index.html"));
-});
 
 app.get("/", (request, response) => {
   console.log(request);
