@@ -24,12 +24,18 @@ const Home = () => {
 
   return (
     <div className="p-4">
-      <div className="flex mb-4">
+      <div className="flex mb-4 justify-between gap-4">
         <Link
           to="/checks/create"
           className="text-center w-full py-3 px-4 text-sm font-medium rounded-lg border border-gray-800 text-gray-800"
         >
           Crea nuovo
+        </Link>
+        <Link
+          to="/dashboard/raffa"
+          className="text-center w-full py-3 px-4 text-sm font-medium rounded-lg border border-gray-800 text-gray-800"
+        >
+          Dashboard
         </Link>
       </div>
       {loading ? (
