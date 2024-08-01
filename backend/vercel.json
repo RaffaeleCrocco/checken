@@ -1,6 +1,18 @@
-{
+/* {
   "version": 2,
   "builds": [{ "src": "*.js", "use": "@vercel/node" }],
   "routes": [{ "src": "/(.*)", "dest": "/index.html" }],
   "rewrites": [{ "source": "/(.*)", "destination": "../frontend/index.html" }]
+}
+ */
+{
+  "version": 2,
+  "builds": [
+    { "src": "backend/**/*.js", "use": "@vercel/node" }, // Adjust the source path as necessary
+    { "src": "frontend/index.html", "use": "@vercel/static" } // Serve static files from frontend
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/frontend/index.html" } // All other routes to index.html
+  ],
+  "rewrites": [{ "source": "/(.*)", "destination": "/frontend/index.html" }]
 }
