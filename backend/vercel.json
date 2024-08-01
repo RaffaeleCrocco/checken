@@ -1,7 +1,10 @@
 {
   "version": 2,
   "builds": [{ "source": "*.js", "use": "@vercel/node" }],
-  "routes": [{ "source": "/", "destination": "/" }],
+  "routes": [
+    { "source": "/", "destination": "/" },
+    { "source": "/*", "destination": "/" }
+  ],
   "rewrites": [
     {
       "source": "/",
