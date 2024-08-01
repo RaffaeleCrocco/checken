@@ -7,12 +7,13 @@ import ShowCheck from "./pages/ShowCheck";
 import EditCheck from "./pages/EditCheck";
 import DeleteCheck from "./pages/DeleteCheck";
 import Dashboard from "./pages/Dashboard";
+import { BASEURL } from "./config";
 
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/checks/create" element={<CreateCheck />} />
+      <Route path={`${BASEURL}/checks/create`} element={<CreateCheck />} />
       <Route path="/dashboard/:user" element={<Dashboard />} />
       <Route path="/checks/details/:id" element={<ShowCheck />} />
       <Route path="/checks/edit/:id" element={<EditCheck />} />
