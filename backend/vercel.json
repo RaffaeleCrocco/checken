@@ -1,11 +1,11 @@
 {
   "version": 2,
   "builds": [{ "source": "*.js", "use": "@vercel/node" }],
-  "routes": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "routes": [{ "source": "/", "destination": "/" }],
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "source": "/",
+      "destination": "/"
     }
   ]
 }
