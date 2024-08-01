@@ -4,6 +4,7 @@ import Spinner from "../components/Spinner";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { IoHomeOutline } from "react-icons/io5";
 import InputMask from "react-input-mask";
+import { BASEURL } from "../config";
 
 const EditCheck = () => {
   const [type, setType] = useState("checkout");
