@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "../components/Spinner";
+import { BASEURL } from "../config";
 import { Link, useNavigate } from "react-router-dom";
 import { IoHomeOutline } from "react-icons/io5";
 import InputMask from "react-input-mask";
@@ -22,7 +23,7 @@ const CreateCheck = () => {
     };
     setLoading(true);
     axios
-      .post("http://192.168.1.159:5555/checks", data)
+      .post(`${BASEURL}/checks`, data)
       .then(() => {
         setLoading(false);
         navigate("/");

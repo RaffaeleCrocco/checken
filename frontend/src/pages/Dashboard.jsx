@@ -15,7 +15,7 @@ const Dashboard = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://192.168.1.159:5555/checks/user/${user}`)
+      .get(`${BASEURL}/checks/user/${user}`)
       .then((response) => {
         setChecks(response.data.data);
         setOuts(response.data.outs);

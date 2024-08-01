@@ -10,7 +10,7 @@ const Home = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://192.168.1.159:5555/checks")
+      .get(`${BASEURL}/checks`)
       .then((response) => {
         setChecks(response.data.data);
         setLoading(false);

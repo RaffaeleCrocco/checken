@@ -17,7 +17,7 @@ const EditCheck = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://192.168.1.159:5555/checks/${id}`)
+      .get(`${BASEURL}/checks/${id}`)
       .then((response) => {
         setType(response.data.type);
         setAgent(response.data.agent);
@@ -43,7 +43,7 @@ const EditCheck = () => {
     };
     setLoading(true);
     axios
-      .put(`http://192.168.1.159:5555/checks/${id}`, data)
+      .put(`${BASEURL}/checks/${id}`, data)
       .then(() => {
         setLoading(false);
         navigate(-1);
@@ -59,7 +59,7 @@ const EditCheck = () => {
   const handleDeleteCheck = () => {
     setLoading(true);
     axios
-      .delete(`http://192.168.1.159:5555/checks/${id}`)
+      .delete(`${BASEURL}/checks/${id}`)
       .then(() => {
         setLoading(false);
         navigate(-1);
