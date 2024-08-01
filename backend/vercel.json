@@ -1,11 +1,5 @@
 {
   "version": 2,
   "builds": [{ "src": "*.js", "use": "@vercel/node" }],
-  "routes": [{ "source": "/(.*)", "dest": "../frontend/index.html" }],
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "../frontend/index.html"
-    }
-  ]
+  "routes": [{ "source": "/(.*)", "dest": "../frontend/index.html" }]
 }
