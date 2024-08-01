@@ -3,7 +3,7 @@
   "builds": [{ "source": "*.js", "use": "@vercel/node" }],
   "routes": [
     { "source": "/", "destination": "/" },
-    { "source": "/*", "destination": "/" }
+    { "source": "/checks/create", "destination": "/" }
   ],
   "rewrites": [
     {
