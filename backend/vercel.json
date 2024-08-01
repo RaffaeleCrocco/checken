@@ -1,5 +1,12 @@
 {
   "version": 2,
-  "builds": [{ "source": "*.js", "use": "@vercel/node" }],
-  "routes": [{ "src": "/[^.]+", "dest": "/", "status": 200 }]
+  "builds": [{ "src": "*.js", "use": "@vercel/node" }],
+  "routes": [
+    { "src": "/", "dest": "/" },
+    { "src": "/dashboard/*", "dest": "/" },
+    { "src": "/checks/details/*", "dest": "/" },
+    { "src": "/checks/edit/*", "dest": "/" },
+    { "src": "/checks/delete/*", "dest": "/" },
+    { "src": "/checks/create", "dest": "/" }
+  ]
 }
