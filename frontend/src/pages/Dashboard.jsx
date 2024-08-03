@@ -100,47 +100,51 @@ const Dashboard = () => {
               </p>
             </div>
           </div>
-          <div className="border rounded-md mt-4">
-            <table className="min-w-full divide-y divide-gray-200">
-              <tbody className="divide-y divide-gray-200">
-                {notAssignedChecks
-                  .sort((a, b) => new Date(b.time) - new Date(a.time))
-                  .map((check, index) => (
-                    <tr key={check._id}>
-                      <td className="px-3 py-5 whitespace-nowrap text-sm font-medium text-gray-800">
-                        <span className="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium border border-gray-800 text-gray-800">
-                          {check.type}
-                        </span>
-                      </td>
-                      <td className="px-3 py-5 whitespace-nowrap text-sm font-medium text-gray-800">
-                        {new Date(check.time).toLocaleString("it-IT", {
-                          month: "long",
-                          day: "numeric",
-                        })}
-                        {", "}
-                        {new Date(check.time).toLocaleString("it-IT", {
-                          hour: "numeric",
-                          minute: "numeric",
-                          hour12: false, // Use 24-hour format
-                        })}
-                      </td>
-                      <td className="px-3 py-5 whitespace-nowrap text-sm font-medium text-gray-800 flex justify-end">
-                        <Link
-                          to={`/checks/edit/${check._id}`}
-                          className="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-gray-100 text-gray-800"
-                        >
-                          Assegna
-                        </Link>
-                      </td>
-                      {/*<td className="px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-800">
+          {notAssignedChecks.length != 0 ? (
+            <div className="border rounded-md mt-4">
+              <table className="min-w-full divide-y divide-gray-200">
+                <tbody className="divide-y divide-gray-200">
+                  {notAssignedChecks
+                    .sort((a, b) => new Date(b.time) - new Date(a.time))
+                    .map((check, index) => (
+                      <tr key={check._id}>
+                        <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+                          <span className="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium border border-gray-800 text-gray-800">
+                            {check.type}
+                          </span>
+                        </td>
+                        <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+                          {new Date(check.time).toLocaleString("it-IT", {
+                            month: "long",
+                            day: "numeric",
+                          })}
+                          {", "}
+                          {new Date(check.time).toLocaleString("it-IT", {
+                            hour: "numeric",
+                            minute: "numeric",
+                            hour12: false, // Use 24-hour format
+                          })}
+                        </td>
+                        <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-800 flex justify-end">
+                          <Link
+                            to={`/checks/edit/${check._id}`}
+                            className="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-gray-100 text-gray-800"
+                          >
+                            Assegna
+                          </Link>
+                        </td>
+                        {/*<td className="px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-800">
                     {check.place.building}-P{check.place.floor}-
                     {check.place.number}-{check.place.room}
                   </td> */}
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-          </div>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            ""
+          )}
           <div className="border rounded-md mt-4">
             <table className="min-w-full divide-y divide-gray-200">
               <tbody className="divide-y divide-gray-200">
@@ -148,7 +152,7 @@ const Dashboard = () => {
                   .sort((a, b) => new Date(b.time) - new Date(a.time))
                   .map((check, index) => (
                     <tr key={check._id}>
-                      <td className="px-3 py-5 whitespace-nowrap text-sm font-medium text-gray-800">
+                      <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
                         <span
                           className={`inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium border border-gray-800 text-gray-800 ${
                             check.isCompleted ? "bg-green-100" : ""
@@ -157,7 +161,7 @@ const Dashboard = () => {
                           {check.type}
                         </span>
                       </td>
-                      <td className="px-3 py-5 whitespace-nowrap text-sm font-medium text-gray-800">
+                      <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
                         {new Date(check.time).toLocaleString("it-IT", {
                           month: "long",
                           day: "numeric",
@@ -169,7 +173,7 @@ const Dashboard = () => {
                           hour12: false, // Use 24-hour format
                         })}
                       </td>
-                      <td className="px-3 py-5 whitespace-nowrap text-sm font-medium text-gray-800 flex justify-end">
+                      <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-800 flex justify-end">
                         {check.isAssigned ? (
                           <Link
                             to={`/checks/edit/${check._id}`}
