@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "../components/Spinner";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import CountUp from "../components/CountUp";
 import { BASEURL } from "../config";
 
@@ -12,6 +12,7 @@ const Dashboard = () => {
   const [ins, setIns] = useState([]);
   const [loading, setLoading] = useState(false);
   const { user } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "../components/Spinner";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { IoHomeOutline } from "react-icons/io5";
-import InputMask from "react-input-mask";
+import { useNavigate, useParams } from "react-router-dom";
 import { BASEURL } from "../config";
 
 const EditCheck = () => {
