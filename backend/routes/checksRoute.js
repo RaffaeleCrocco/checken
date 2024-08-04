@@ -30,32 +30,55 @@ router.post("/", async (request, response) => {
   }
 });
 
-//route to get all check from database
-router.get("/", async (request, response) => {
+//route for getting one check by id
+router.get("/:id", async (request, response) => {
   try {
-    const checks = await Check.find({});
-    response.status(200).json({
-      count: checks.length,
-      data: checks,
-    });
+    const { id } = request.params;
+    const check = await Check.findById(id);
+
+    response.status(200).json(check);
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
   }
 });
 
-//route for deleting all checks
-router.delete("/delete", async (request, response) => {
+//route for updating a check by id
+router.put("/:id", async (request, response) => {
   try {
-    const result = await Check.deleteMany({});
-    if (!result) {
+    const { type, time, agent } = request.body;
+    if (!type || !time) {
       return response
         .status(400)
-        .json({ message: "no check to delete were found" });
+        .send({ message: "missing fields on request" });
     }
-    return response
-      .status(200)
-      .send({ message: "all checks deleted successfully" });
+    if (agent) {
+      request.body = { ...request.body, isAssigned: true };
+    } else {
+      request.body = { ...request.body, isAssigned: false, isCompleted: false };
+    }
+    const { id } = request.params;
+    const result = await Check.findByIdAndUpdate(id, request.body);
+    if (!result) {
+      return response.status(400).json({ message: "check not found" });
+    }
+    return response.status(200).send({ message: "check updated successfully" });
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
+//route for deleting one check by id
+router.delete("/:id", async (request, response) => {
+  try {
+    const { id } = request.params;
+    const result = await Check.findByIdAndDelete(id);
+
+    if (!result) {
+      return response.status(400).json({ message: "check not found" });
+    }
+    return response.status(200).send({ message: "check deleted successfully" });
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
@@ -180,55 +203,14 @@ router.put("/complete/:id", async (request, response) => {
   }
 });
 
-//route for getting one check by id
-router.get("/:id", async (request, response) => {
+//route to get all check from database
+router.get("/", async (request, response) => {
   try {
-    const { id } = request.params;
-    const check = await Check.findById(id);
-
-    response.status(200).json(check);
-  } catch (error) {
-    console.log(error.message);
-    response.status(500).send({ message: error.message });
-  }
-});
-
-//route for updating a check by id
-router.put("/:id", async (request, response) => {
-  try {
-    const { type, time, agent } = request.body;
-    if (!type || !time) {
-      return response
-        .status(400)
-        .send({ message: "missing fields on request" });
-    }
-    if (agent) {
-      request.body = { ...request.body, isAssigned: true };
-    } else {
-      request.body = { ...request.body, isAssigned: false, isCompleted: false };
-    }
-    const { id } = request.params;
-    const result = await Check.findByIdAndUpdate(id, request.body);
-    if (!result) {
-      return response.status(400).json({ message: "check not found" });
-    }
-    return response.status(200).send({ message: "check updated successfully" });
-  } catch (error) {
-    console.log(error.message);
-    response.status(500).send({ message: error.message });
-  }
-});
-
-//route for deleting one check by id
-router.delete("/:id", async (request, response) => {
-  try {
-    const { id } = request.params;
-    const result = await Check.findByIdAndDelete(id);
-
-    if (!result) {
-      return response.status(400).json({ message: "check not found" });
-    }
-    return response.status(200).send({ message: "check deleted successfully" });
+    const checks = await Check.find({});
+    response.status(200).json({
+      count: checks.length,
+      data: checks,
+    });
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
