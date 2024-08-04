@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import Spinner from "../components/Spinner";
 import { BASEURL } from "../config";
-import { Link, useNavigate } from "react-router-dom";
-import { IoHomeOutline } from "react-icons/io5";
-import InputMask from "react-input-mask";
+import { useNavigate } from "react-router-dom";
 
 const CreateCheck = () => {
   const [type, setType] = useState("checkout");
@@ -26,11 +24,10 @@ const CreateCheck = () => {
       .post(`${BASEURL}/checks`, data)
       .then(() => {
         setLoading(false);
-        navigate("/");
+        navigate(-1);
       })
       .catch((error) => {
         alert("Controlla i campi");
-        // alert(JSON.stringify(data));
         setLoading(false);
         console.log(error);
       });

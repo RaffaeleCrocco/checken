@@ -3,29 +3,37 @@ import { Check } from "../models/checkModel.js";
 
 const router = express.Router();
 
-//route to creat new check
+//route to create new check
 router.post("/", async (request, response) => {
   try {
     const { type, time, agent, place } = request.body;
+    console.log("Received Request Body:", request.body); // Debugging output
+
     if (!type || !time) {
       return response
         .status(400)
         .send({ message: "missing fields on request" });
     }
-    var newCheck = {
+
+    let newCheck = {
       type,
       time,
     };
+
     if (agent) {
       newCheck = { ...newCheck, agent, isAssigned: true };
     }
     if (place) {
       newCheck = { ...newCheck, place };
     }
+
+    console.log("New Check Object:", newCheck); // Debugging output
+
+    // Create new check
     const check = await Check.create(newCheck);
     response.status(201).send(check);
   } catch (error) {
-    console.log(error.message);
+    console.log("Error:", error.message);
     response.status(500).send({ message: error.message });
   }
 });
