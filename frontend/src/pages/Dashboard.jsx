@@ -31,7 +31,7 @@ const Dashboard = () => {
       });
   }, [user]);
 
-  const handleEditCheck = (isAssigned, isCompleted, id) => {
+  const handleEditCheckComplete = (isAssigned, isCompleted, id) => {
     const data = {
       isAssigned,
       isCompleted,
@@ -175,7 +175,7 @@ const Dashboard = () => {
                       <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
                         <span
                           onClick={() =>
-                            handleEditCheck(
+                            handleEditCheckComplete(
                               check.isAssigned,
                               check.isCompleted,
                               check._id
