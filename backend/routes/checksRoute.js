@@ -158,24 +158,32 @@ router.put("/complete/:id", async (request, response) => {
     const { isAssigned, isCompleted } = request.body;
     const { id } = request.params;
 
+    // Debugging output
+    console.log("Received Request Body:", request.body);
+    console.log("Received Request Params:", request.params);
+
     if (isCompleted === undefined || isAssigned === undefined) {
       return response
         .status(400)
         .send({ message: "missing fields on request" });
     }
 
-    // Update isCompleted based on isAssigned
+    // Prepare fields for update
     const updatedFields = {
       isCompleted: isAssigned ? !isCompleted : isCompleted,
     };
+
+    // Debugging output
+    console.log("Fields to Update:", updatedFields);
 
     const result = await Check.findByIdAndUpdate(id, updatedFields);
     if (!result) {
       return response.status(400).json({ message: "check not found" });
     }
+
     return response.status(200).send({ message: "check updated successfully" });
   } catch (error) {
-    console.log(error.message);
+    console.log("Error:", error.message);
     response.status(500).send({ message: error.message });
   }
 });
