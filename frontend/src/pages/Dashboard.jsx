@@ -34,7 +34,7 @@ const Dashboard = () => {
   const handleEditCheck = (isAssigned, isCompleted, id) => {
     const data = {
       isAssigned,
-      isCompleted: !isCompleted,
+      isCompleted,
     };
     setLoading(true);
     axios
