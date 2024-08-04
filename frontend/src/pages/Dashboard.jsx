@@ -30,8 +30,9 @@ const Dashboard = () => {
       });
   }, [user]);
 
-  const handleEditCheck = (isCompleted, id) => {
+  const handleEditCheck = (isAssigned, isCompleted, id) => {
     const data = {
+      isAssigned,
       isCompleted: !isCompleted,
     };
     setLoading(true);
@@ -43,7 +44,6 @@ const Dashboard = () => {
       })
       .catch((error) => {
         alert("Controlla i campi");
-        // alert(JSON.stringify(data));
         setLoading(false);
         console.log(error);
       });
@@ -174,7 +174,11 @@ const Dashboard = () => {
                       <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
                         <span
                           onClick={() =>
-                            handleEditCheck(check.isCompleted, check._id)
+                            handleEditCheck(
+                              check.isAssigned,
+                              check.isCompleted,
+                              check._id
+                            )
                           }
                           className={`inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium border border-gray-800 text-gray-800 ${
                             check.isCompleted ? "bg-green-100" : ""
