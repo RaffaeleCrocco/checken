@@ -43,21 +43,54 @@ router.get("/:id", async (request, response) => {
   }
 });
 
+//route for updating the complete field of a check by id
+router.put("/complete/:id", async (request, response) => {
+  try {
+    const { isAssigned, isCompleted } = request.body;
+    const { id } = request.params;
+
+    if (isCompleted === undefined || isAssigned === undefined) {
+      return response
+        .status(400)
+        .send({ message: "missing fields on request" });
+    }
+
+    // Update isCompleted based on isAssigned
+    const updatedFields = {
+      isCompleted: isAssigned ? !isCompleted : isCompleted,
+    };
+
+    const result = await Check.findByIdAndUpdate(id, updatedFields);
+    if (!result) {
+      return response.status(400).json({ message: "check not found" });
+    }
+    return response.status(200).send({ message: "check updated successfully" });
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
 //route for updating a check by id
 router.put("/:id", async (request, response) => {
   try {
     const { type, time, agent } = request.body;
+    const { id } = request.params;
+
     if (!type || !time) {
       return response
         .status(400)
         .send({ message: "missing fields on request" });
     }
+
+    const updatedFields = { ...request.body };
     if (agent) {
-      request.body = { ...request.body, isAssigned: true };
+      updatedFields.isAssigned = true;
     } else {
-      request.body = { ...request.body, isAssigned: false, isCompleted: false };
+      updatedFields.isAssigned = false;
+      updatedFields.isCompleted = false;
     }
-    const { id } = request.params;
+
     const result = await Check.findByIdAndUpdate(id, request.body);
     if (!result) {
       return response.status(400).json({ message: "check not found" });

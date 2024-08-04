@@ -40,6 +40,8 @@ const EditCheck = () => {
       time,
       isCompleted,
     };
+
+    console.log("Sending Data:", data); // For debugging
     setLoading(true);
     axios
       .put(`${BASEURL}/checks/${id}`, data)
