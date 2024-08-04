@@ -49,7 +49,6 @@ const EditCheck = () => {
       })
       .catch((error) => {
         alert("Controlla i campi");
-        // alert(JSON.stringify(data));
         setLoading(false);
         console.log(error);
       });
