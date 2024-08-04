@@ -8,7 +8,7 @@ const CreateCheck = () => {
   const [type, setType] = useState("checkout");
   const [agent, setAgent] = useState("");
   const [place, setPlace] = useState("");
-  const [time, setTime] = useState(new Date());
+  const [time, setTime] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
