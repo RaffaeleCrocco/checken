@@ -43,6 +43,34 @@ router.get("/:id", async (request, response) => {
   }
 });
 
+//route for updating the complete field of a check by id
+router.put("/complete/:id", async (request, response) => {
+  try {
+    const { isAssigned, isCompleted } = request.body;
+    const { id } = request.params;
+
+    if (isCompleted === undefined || isAssigned === undefined) {
+      return response
+        .status(400)
+        .send({ message: "missing fields on request" });
+    }
+
+    // Update isCompleted based on isAssigned
+    const updatedFields = {
+      isCompleted: isAssigned ? !isCompleted : isCompleted,
+    };
+
+    const result = await Check.findByIdAndUpdate(id, updatedFields);
+    if (!result) {
+      return response.status(400).json({ message: "check not found" });
+    }
+    return response.status(200).send({ message: "check updated successfully" });
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
 //route for updating a check by id
 router.put("/:id", async (request, response) => {
   try {
@@ -171,34 +199,6 @@ router.get("/user/:user", async (request, response) => {
     });
   } catch (error) {
     console.error(error.message);
-    response.status(500).send({ message: error.message });
-  }
-});
-
-//route for updating the complete field of a check by id
-router.put("/complete/:id", async (request, response) => {
-  try {
-    const { isAssigned, isCompleted } = request.body;
-    const { id } = request.params;
-
-    if (isCompleted === undefined || isAssigned === undefined) {
-      return response
-        .status(400)
-        .send({ message: "missing fields on request" });
-    }
-
-    // Update isCompleted based on isAssigned
-    const updatedFields = {
-      isCompleted: isAssigned ? !isCompleted : isCompleted,
-    };
-
-    const result = await Check.findByIdAndUpdate(id, updatedFields);
-    if (!result) {
-      return response.status(400).json({ message: "check not found" });
-    }
-    return response.status(200).send({ message: "check updated successfully" });
-  } catch (error) {
-    console.log(error.message);
     response.status(500).send({ message: error.message });
   }
 });
