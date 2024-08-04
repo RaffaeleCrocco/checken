@@ -152,6 +152,31 @@ router.get("/user/:user", async (request, response) => {
   }
 });
 
+//route for updating the complete field of a check by id
+router.put("/complete/:id", async (request, response) => {
+  try {
+    const { completedState } = request.body;
+    const { id } = request.params;
+
+    if (completedState === undefined) {
+      return response
+        .status(400)
+        .send({ message: "missing fields on request" });
+    }
+
+    request.body.isCompleted = !completedState;
+
+    const result = await Check.findByIdAndUpdate(id, request.body);
+    if (!result) {
+      return response.status(400).json({ message: "check not found" });
+    }
+    return response.status(200).send({ message: "check updated successfully" });
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
 //route for getting one check by id
 router.get("/:id", async (request, response) => {
   try {

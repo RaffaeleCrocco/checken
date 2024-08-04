@@ -30,6 +30,25 @@ const Dashboard = () => {
       });
   }, [user]);
 
+  const handleEditCheck = (isCompleted, id) => {
+    const data = {
+      isCompleted: !isCompleted,
+    };
+    setLoading(true);
+    axios
+      .put(`${BASEURL}/checks/complete/${id}`, data)
+      .then(() => {
+        setLoading(false);
+        navigate(0);
+      })
+      .catch((error) => {
+        alert("Controlla i campi");
+        // alert(JSON.stringify(data));
+        setLoading(false);
+        console.log(error);
+      });
+  };
+
   if (loading) return <Spinner />;
 
   return (
@@ -154,6 +173,9 @@ const Dashboard = () => {
                     <tr key={check._id}>
                       <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
                         <span
+                          onClick={() =>
+                            handleEditCheck(check.isCompleted, check._id)
+                          }
                           className={`inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium border border-gray-800 text-gray-800 ${
                             check.isCompleted ? "bg-green-100" : ""
                           }`}
