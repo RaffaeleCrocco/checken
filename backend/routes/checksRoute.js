@@ -13,7 +13,7 @@ router.get("/users", async (request, response) => {
     const amountPerCheckout = 6.5;
     const amountPerCheckin = 10;
 
-    const results = {};
+    const results = [];
 
     for (const agent of agents) {
       const checks = await Check.find({ agent });
@@ -72,7 +72,8 @@ router.get("/users", async (request, response) => {
         }
       });
 
-      results[agent] = {
+      results.push({
+        agent,
         outs: {
           total: totals.checkout,
           current: currents.checkout,
@@ -83,10 +84,9 @@ router.get("/users", async (request, response) => {
           current: currents.checkin,
           last: lasts.checkin,
         },
-      };
+      });
     }
-
-    response.status(200).json({ data: results });
+    response.status(200).json(results);
   } catch (error) {
     console.error(error.message);
     response.status(500).send({ message: error.message });
