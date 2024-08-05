@@ -86,7 +86,7 @@ router.get("/users", async (request, response) => {
       };
     }
 
-    response.status(200).json(results);
+    response.status(200).json({ data: results });
   } catch (error) {
     console.error(error.message);
     response.status(500).send({ message: error.message });
