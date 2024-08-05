@@ -3,6 +3,20 @@ import { Check } from "../models/checkModel.js";
 
 const router = express.Router();
 
+//route to get all check from database
+router.get("/", async (request, response) => {
+  try {
+    const checks = await Check.find({});
+    response.status(200).json({
+      count: checks.length,
+      data: checks,
+    });
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
 //route to create new check
 router.post("/", async (request, response) => {
   try {
@@ -51,34 +65,6 @@ router.get("/:id", async (request, response) => {
   }
 });
 
-//route for updating the complete field of a check by id
-router.put("/complete/:id", async (request, response) => {
-  try {
-    const { isAssigned, isCompleted } = request.body;
-    const { id } = request.params;
-
-    if (isCompleted === undefined || isAssigned === undefined) {
-      return response
-        .status(400)
-        .send({ message: "missing fields on request" });
-    }
-
-    // Update isCompleted based on isAssigned
-    const updatedFields = {
-      isCompleted: isAssigned ? !isCompleted : isCompleted,
-    };
-
-    const result = await Check.findByIdAndUpdate(id, updatedFields);
-    if (!result) {
-      return response.status(400).json({ message: "check not found" });
-    }
-    return response.status(200).send({ message: "check updated successfully" });
-  } catch (error) {
-    console.log(error.message);
-    response.status(500).send({ message: error.message });
-  }
-});
-
 //route for updating a check by id
 router.put("/:id", async (request, response) => {
   try {
@@ -120,6 +106,34 @@ router.delete("/:id", async (request, response) => {
       return response.status(400).json({ message: "check not found" });
     }
     return response.status(200).send({ message: "check deleted successfully" });
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
+//route for updating the complete field of a check by id
+router.put("/complete/:id", async (request, response) => {
+  try {
+    const { isAssigned, isCompleted } = request.body;
+    const { id } = request.params;
+
+    if (isCompleted === undefined || isAssigned === undefined) {
+      return response
+        .status(400)
+        .send({ message: "missing fields on request" });
+    }
+
+    // Update isCompleted based on isAssigned
+    const updatedFields = {
+      isCompleted: isAssigned ? !isCompleted : isCompleted,
+    };
+
+    const result = await Check.findByIdAndUpdate(id, updatedFields);
+    if (!result) {
+      return response.status(400).json({ message: "check not found" });
+    }
+    return response.status(200).send({ message: "check updated successfully" });
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
@@ -302,20 +316,6 @@ router.get("/users", async (request, response) => {
     response.status(200).json(results);
   } catch (error) {
     console.error(error.message);
-    response.status(500).send({ message: error.message });
-  }
-});
-
-//route to get all check from database
-router.get("/", async (request, response) => {
-  try {
-    const checks = await Check.find({});
-    response.status(200).json({
-      count: checks.length,
-      data: checks,
-    });
-  } catch (error) {
-    console.log(error.message);
     response.status(500).send({ message: error.message });
   }
 });

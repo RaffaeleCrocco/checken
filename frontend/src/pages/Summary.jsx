@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "../components/Spinner";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import CountUp from "../components/CountUp";
 import { BASEURL } from "../config";
 
 const Summary = () => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -22,7 +21,7 @@ const Summary = () => {
         console.log(error);
         setLoading(false);
       });
-  }, [user]);
+  }, [data]);
 
   if (loading) return <Spinner />;
 
