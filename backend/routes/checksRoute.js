@@ -245,7 +245,7 @@ router.put("/:id", async (request, response) => {
       updatedFields.isCompleted = false;
     }
 
-    const result = await Check.findByIdAndUpdate(id, request.body);
+    const result = await Check.findByIdAndUpdate(id, updatedFields);
     if (!result) {
       return response.status(400).json({ message: "check not found" });
     }
