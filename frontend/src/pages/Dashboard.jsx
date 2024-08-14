@@ -57,28 +57,8 @@ const Dashboard = () => {
       {outs && ins ? (
         <div>
           {/* <p className="font-semibold mt-4 text-xl">Bentornat&#601;,</p> */}
-          <p className="font-semibold mb-4 text-5xl capitalize flex justify-between">
-            <span className="leading-snug">{user}</span>
-            <div>
-              <Link
-                to={`/dashboard/giulia`}
-                className="ms-2 inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-pink-100 text-pink-800"
-              >
-                giulia
-              </Link>
-              <Link
-                to={`/dashboard/giusy`}
-                className="ms-2 inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
-              >
-                giusy
-              </Link>
-              <Link
-                to={`/dashboard/raffa`}
-                className="ms-2 inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-orange-100 text-orange-800"
-              >
-                raffa
-              </Link>
-            </div>
+          <p className="font-semibold mb-4 text-5xl capitalize leading-snug">
+            {user}
           </p>
           <div className="flex mb-4">
             <Link

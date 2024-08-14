@@ -28,13 +28,47 @@ const Summary = () => {
       <p className="leading-snug font-semibold mb-4 text-3xl capitalize flex justify-between">
         Riepilogo
       </p>
+      <div className="mb-4 bg-yellow-50 border border-yellow-200 text-sm text-yellow-800 rounded-lg p-4">
+        <div className="flex">
+          <div className="shrink-0">
+            <svg
+              className="shrink-0 size-4 mt-0.5"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+              <path d="M12 9v4"></path>
+              <path d="M12 17h.01"></path>
+            </svg>
+          </div>
+          <div className="ms-4">
+            <h3
+              id="hs-with-description-label"
+              className="text-sm font-semibold"
+            >
+              Le prossime due schede sono differenti
+            </h3>
+            <div className="mt-1 text-sm text-yellow-700">
+              La prima serve alla contabilità e mostra i risultati raggiunti nel
+              mese scorso.
+            </div>
+          </div>
+        </div>
+      </div>
       {data.length > 0 ? (
         <div>
           <div className="flex flex-col">
             {data.map((user, index) => (
               <div
                 key={index}
-                className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg"
+                className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border border-gray-800 text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg"
               >
                 <div className="flex items-center justify-between w-full">
                   <div>
@@ -48,7 +82,7 @@ const Summary = () => {
                 </div>
               </div>
             ))}
-            <div className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border font-semibold bg-gray-50 text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg">
+            <div className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border border-gray-800 font-semibold bg-gray-50 text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg">
               <div className="flex items-center justify-between w-full">
                 <div>
                   <p className="capitalize">Totale</p>
@@ -77,7 +111,7 @@ const Summary = () => {
             {data.map((user, index) => (
               <div
                 key={index}
-                className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border border-gray-800 text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg"
+                className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg"
               >
                 <div className="flex items-center justify-between w-full">
                   <div>
@@ -93,7 +127,7 @@ const Summary = () => {
                 </div>
               </div>
             ))}
-            <div className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border border-gray-800 font-semibold bg-gray-50 text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg">
+            <div className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border font-semibold bg-gray-50 text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg">
               <div className="flex items-center justify-between w-full">
                 <div>
                   <p className="capitalize">Totale</p>
