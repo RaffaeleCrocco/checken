@@ -1,5 +1,5 @@
 import React from "react";
-import checkenlittle from "../../public/vite.svg";
+import checkenlittle from "../assets/app-icon.png";
 
 const Spinner = () => {
   return (
