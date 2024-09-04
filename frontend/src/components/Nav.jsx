@@ -10,7 +10,7 @@ const Nav = () => {
       <div
         onClick={() => setIsOpen(!isOpen)}
         className={`bg-gray-100 ${
-          isOpen ? "h-[300px]" : "h-[40px]"
+          isOpen ? "h-[350px]" : "h-[60px]"
         } overflow-hidden w-full transition-all fixed z-30 bottom-0`}
       >
         <div className="h-[40px] flex justify-center items-center text-xl">
