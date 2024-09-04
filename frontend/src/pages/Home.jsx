@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "../components/Spinner";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BASEURL } from "../config";
 
 const Home = () => {
   const [checks, setChecks] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -21,6 +23,25 @@ const Home = () => {
         setLoading(false);
       });
   }, []);
+
+  const handleEditCheckComplete = (isAssigned, isCompleted, id) => {
+    const data = {
+      isAssigned,
+      isCompleted,
+    };
+    setLoading(true);
+    axios
+      .put(`${BASEURL}/checks/complete/${id}`, data)
+      .then(() => {
+        setLoading(false);
+        navigate(0);
+      })
+      .catch((error) => {
+        alert("Controlla i campi");
+        setLoading(false);
+        console.log(error);
+      });
+  };
 
   return (
     <div className="p-4">
@@ -42,9 +63,9 @@ const Home = () => {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
               <circle cx="12" cy="12" r="10"></circle>
               <path d="M12 16v-4"></path>
@@ -83,8 +104,15 @@ const Home = () => {
                 .sort((a, b) => new Date(b.time) - new Date(a.time))
                 .map((check, index) => (
                   <tr key={check._id}>
-                    <td className="px-3 py-5 whitespace-nowrap text-sm font-medium text-gray-800">
+                    <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
                       <span
+                        onClick={() =>
+                          handleEditCheckComplete(
+                            check.isAssigned,
+                            check.isCompleted,
+                            check._id
+                          )
+                        }
                         className={`inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium border border-gray-800 text-gray-800 ${
                           check.isCompleted ? "bg-green-100" : ""
                         }`}
