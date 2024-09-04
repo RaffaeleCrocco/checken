@@ -16,7 +16,7 @@ const Nav = () => {
         <div className="h-[40px] flex justify-center items-center text-xl">
           {isOpen ? <FaTimes /> : <FaEquals />}
         </div>
-        <div className="flex flex-col text-center py-10 gap-3">
+        <div className="flex flex-col text-center py-8 gap-3">
           <Link to="/" className="font-bold">
             Home
           </Link>
@@ -29,6 +29,12 @@ const Nav = () => {
           <Link to="/dashboard/giulia">Dashboard Giulia</Link>
           <Link to="/dashboard/giusy">Dashboard Giusy</Link>
           <Link to="/dashboard/raffa">Dashboard Raffa</Link>
+          <Link to="/dashboard/bonus">
+            Dashboard Bonus
+            <div className="animate-pulse ms-2 inline-flex items-center leading-none pt-1.5 pb-1 px-2 rounded-sm text-xs bg-purple-800 text-white">
+              NEW
+            </div>
+          </Link>
         </div>
       </div>
     </>

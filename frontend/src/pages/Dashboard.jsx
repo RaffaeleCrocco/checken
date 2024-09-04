@@ -189,7 +189,9 @@ const Dashboard = () => {
                                 ? "bg-pink-100 text-pink-800"
                                 : check.agent === "giusy"
                                 ? "bg-blue-100 text-blue-800"
-                                : "bg-orange-100 text-orange-800"
+                                : check.agent === "raffa"
+                                ? "bg-orange-100 text-orange-800"
+                                : "bg-purple-100 text-purple-800"
                             }`}
                           >
                             {check.agent}

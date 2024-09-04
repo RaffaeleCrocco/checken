@@ -53,8 +53,8 @@ const Home = () => {
           </div>
           <div className="flex-1 md:flex md:justify-between ms-2">
             <p id="hs-link-on-right-label" className="text-sm">
-              Update nuova versione. Aggiunta la navigazione e nella home i
-              checkin vengono mostrati dal più recente. v1408.1136
+              Update nuova versione. Aggiunto utente bonus per i check in/out
+              che non possono essere coperti dai runners principali. v0409.1336
             </p>
           </div>
         </div>
@@ -113,7 +113,9 @@ const Home = () => {
                               ? "bg-pink-100 text-pink-800"
                               : check.agent === "giusy"
                               ? "bg-blue-100 text-blue-800"
-                              : "bg-orange-100 text-orange-800"
+                              : check.agent === "raffa"
+                              ? "bg-orange-100 text-orange-800"
+                              : "bg-purple-100 text-purple-800"
                           }`}
                         >
                           {check.agent}

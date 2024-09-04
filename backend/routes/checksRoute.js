@@ -3,7 +3,6 @@ import { Check } from "../models/checkModel.js";
 
 const router = express.Router();
 
-
 //route to get all check by user
 router.get("/user/:user", async (request, response) => {
   try {
@@ -97,7 +96,7 @@ router.get("/user/:user", async (request, response) => {
 //route to get all check by user
 router.get("/users", async (request, response) => {
   try {
-    const agents = ["raffa", "giulia", "giusy"];
+    const agents = ["raffa", "giulia", "giusy", "bonus"];
     const now = new Date();
     const currentMonth = now.getMonth();
     const previousMonth = currentMonth === 0 ? 11 : currentMonth - 1;
